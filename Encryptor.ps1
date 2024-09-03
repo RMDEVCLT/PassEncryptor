@@ -11,14 +11,3 @@ $key = Import-CliXml "c:\temp\myKey.key"
 $myPassWord = 'MyPassHere'
 ConvertTo-SecureString $myPassWord -AsPlainText -Force | ConvertFrom-SecureString -Key $key | Set-Content "c:\temp\myPassword.txt"
 
-<##
-# Get the encrypted password
-$encryptedPassword = Get-Content "c:\temp\myPassword.txt" -Raw
-# Import the key (it should be obtained from a Vault preferably)
-$key = Import-CliXml "c:\temp\myKey.key"
-
-$secureString = ConvertTo-SecureString $encryptedPassword -Key $key
-[System.Net.NetworkCredential]::new('', $secureString).Password
-
-##>>
-
